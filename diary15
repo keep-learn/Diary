@@ -1,0 +1,19 @@
+Today i learn how to use git 
+git add 
+git commit 
+git push
+git pull
+
+git checkout -b  // new add a branch and switch to this branch
+git branch 
+git rebase
+git fetch origin
+
+git reflog
+git log
+
+gitk
+
+git commit -am " "
+
+git checkout --filename  //³·Ïú²Ù×÷
