@@ -3,7 +3,7 @@
 [website]http://www.lovezbs.com
 *Hope i can be better and better
 *The page is writen my markdown *
->
+
 ```
 <?php
    $str="I am a colleage students in XianYang , i am study php , i hope 
@@ -13,6 +13,8 @@
    echo "What i want say to you :".$str.$date;
 
 ?>
+
+
 ```
 ##Picture of myself 
 ![Taken on JiangNan university](./me.jpg)
