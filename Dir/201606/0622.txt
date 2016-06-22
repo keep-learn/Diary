@@ -15,3 +15,144 @@ adminRole.append(option);
         });
     }
 });
+
+
+Jquery valid 校验总结:
+<script type="text/javascript">
+$(function(){
+$('.skin-minimal input').iCheck({
+checkboxClass: 'icheckbox-blue',
+radioClass: 'iradio-blue',
+increaseArea: '20%'
+});
+//选择 角色类型
+$("#adminType").change(function(){
+var $adminType=$("#adminType").val();
+if($adminType){
+$.getJSON("index.php?r=user/getrole",{adminType:$adminType},function(json){
+var adminRole=$("#adminRole");
+$("option",adminRole).remove();
+var op = '<option value="">请选择角色</option>';
+adminRole.append(op);
+$.each(json,function(index,array){
+option = "<option value='"+array['name']+"'>"+array['name']+"</option>";
+adminRole.append(option);
+                });
+            });
+        }
+    });
+
+$("#form-admin-add").validate({
+rules:{
+adminName:{
+required:true,
+minlength:2,
+maxlength:16,
+         },
+password:{
+required:true,
+oldpassword: true,
+         },
+password2:{
+required:true,
+oldpassword: true,
+equalTo: "#password"
+},
+sex:{
+required:true,
+         },
+phone:{
+required:true,
+isPhone:true,
+remote: {
+url: "index.php?r=user/checkname",
+type: "post",
+dataType: "json",
+data: {
+_csrf: function () {
+return $("#_csrf").val();//这个是取要验证的密码
+},
+adminType: function () {
+return $("#adminType").val();//这个是取要验证的密码
+}
+                    },
+dataFilter: function (data) {//判断控制器返回的内容
+if (data == "true") {
+return true;
+                        }
+else {
+return false;
+                        }
+                    }
+                }
+         },
+email:{
+required:true,
+email:true,
+remote: {
+url: "index.php?r=company/existemail",
+type: "post",
+dataType: "json",
+data: {
+_csrf: function () {
+return $("#_csrf").val();//这个是取要验证的密码
+},
+adminType: function () {
+return $("#email").val();//这个是取要验证的密码
+}
+                    },
+dataFilter: function (data) {//判断控制器返回的内容
+if (data == "ok") {
+return true;
+                        }
+else {
+return false;
+                        }
+                    }
+                }
+         },
+adminRole:{
+required:true,
+         },
+adminType:{
+required:true,
+            },
+      },
+messages:{
+phone: {
+required: "请填写手机号！",
+isPhone: "手机号输入格式不正确！",
+remote: "该手机号已被注册",
+            },
+password: {
+required: "请填写密码",
+oldpassword:"密码格式不正确！",
+            },
+password2: {
+required: "请填写密码",
+oldpassword:"密码格式不正确！",
+equalTo: "两次输入密码不同",
+            },
+email: {
+required: "请填写邮箱",
+email:"邮箱格式不正确！",
+remote: "该邮箱已被注册",
+            },
+        },
+onkeyup:false,
+focusCleanup:true,
+success:"valid",
+submitHandler:function(form){
+$(form).ajaxSubmit();
+var index = parent.layer.getFrameIndex(window.name);
+parent.$('.btn-refresh').click();
+parent.layer.close(index);
+      }
+   });
+});
+
+jQuery.validator.addMethod("oldpassword", function(value, element) {
+return this.optional(element) ||  /^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[a-z])[0-9A-Za-z!-)]{8,15}$/.test(value);
+}, "密码应该为8-15位之间,必须存在大小写字母和数字");
+
+</script>
