@@ -1,3 +1,4 @@
+Come on !
 通过选择管理员类型,调用Ajax 得到 角色类型; 
 //选择 角色类型
 $("#adminType").change(function(){
