@@ -1,0 +1,17 @@
+通过选择管理员类型,调用Ajax 得到 角色类型; 
+//选择 角色类型
+$("#adminType").change(function(){
+var $adminType=$("#adminType").val();
+if($adminType){
+$.getJSON("index.php?r=user/getrole",{adminType:$adminType},function(json){
+var adminRole=$("#adminRole");
+$("option",adminRole).remove();
+var op = '<option value="">请选择角色</option>';
+adminRole.append(op);
+$.each(json,function(index,array){
+option = "<option value='"+array['name']+"'>"+array['name']+"</option>";
+adminRole.append(option);
+            });
+        });
+    }
+});
