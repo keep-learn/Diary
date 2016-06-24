@@ -17,7 +17,7 @@
 
 ```
 ##Picture of myself 
-![Taken on JiangNan university](./me.jpg)
+![Taken on JiangNan university](https://avatars3.githubusercontent.com/u/9759278?v=3&s=460)
 
 ## Javascritp : Change the input style when is onfocus and blur
 
