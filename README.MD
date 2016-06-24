@@ -19,3 +19,21 @@
 ##Picture of myself 
 ![Taken on JiangNan university](./me.jpg)
 
+## Javascritp : Change the input style when is onfocus and blur
+
+```
+Name : <input id='test-input' type='text' />
+
+<script type="text/javascript" src='jquery-1.10.2.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$('#test-input').focus(function(){
+			$('#test-input').css('background-color','green');
+		});
+		$('#test-input').blur(function(){
+			$('#test-input').css('background-color','red');
+		});
+	});
+</script>
+
+```
